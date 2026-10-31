@@ -2461,7 +2461,7 @@ int rewriteSlotToAppendOnlyFileRio(rio *aof, int db_num, int hashslot, size_t *k
 
         /* Skip keys already expired before snapshot start (unless in import mode) */
         long long expiretime = objectGetExpire(o);
-        if (!server.import_mode && expire_cutoff > 0 && expiretime != -1 && expiretime <= expire_cutoff) {
+        if (!server.import_mode && expire_cutoff > 0 && expiretime != -1 && expiretime < expire_cutoff) {
             continue;
         }
 
